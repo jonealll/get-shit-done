@@ -6,8 +6,9 @@ allowed-tools:
   - Read
   - Write
   - Bash
-  - Task
+  - Agent
   - AskUserQuestion
+requires: [new-project, phase, plan-phase]
 ---
 <objective>
 Start a new milestone: questioning → research (optional) → requirements → roadmap.
@@ -35,17 +36,10 @@ Brownfield equivalent of new-project. Project exists, PROJECT.md has history. Ga
 <context>
 Milestone name: $ARGUMENTS (optional - will prompt if not provided)
 
-**Load project context:**
-@.planning/PROJECT.md
-@.planning/STATE.md
-@.planning/MILESTONES.md
-@.planning/config.json
-
-**Load milestone context (if exists, from /gsd:discuss-milestone):**
-@.planning/MILESTONE-CONTEXT.md
+Project and milestone context files are resolved inside the workflow (`init new-milestone`) and delegated via `<files_to_read>` blocks where subagents are used.
 </context>
 
 <process>
-Execute the new-milestone workflow from @~/.claude/get-shit-done/workflows/new-milestone.md end-to-end.
+Execute end-to-end.
 Preserve all workflow gates (validation, questioning, research, requirements, roadmap approval, commits).
 </process>
